@@ -43,7 +43,7 @@
         </div>
         <div class="row">
            <div class="col-12">
-                Zuletzt aktualisiert: {{$last_updated}}
+                Zuletzt aktualisiert: {{$last_updated}} GMT
            </div>
 
        </div>
