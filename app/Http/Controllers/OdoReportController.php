@@ -40,12 +40,21 @@ class OdoReportController extends Controller
      */
     public function store(Request $request)
     {
-        $date = new \DateTime();
 
-        OdoReport::updateOrCreate(
-            ['user' => $request->get('user'),'created_at' => $date->format("Y-m-d")],
-            $request->all()
-        );
+        $date = Carbon::now();
+        $existingReport = OdoReport::whereYear('created_at' ,"=", $date)
+        ->whereMonth('created_at' ,"=", $date)
+        ->first();
+
+
+        if($existingReport){
+            OdoReport::whereYear('created_at' ,"=", $date)
+        ->whereMonth('created_at' ,"=", $date)->update($request->all());
+        } else{
+            $newReport = new OdoReport($request->all());
+            $newReport->save();
+        }
+
 
     }
 
