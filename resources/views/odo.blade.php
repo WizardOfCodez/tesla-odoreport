@@ -43,7 +43,7 @@
         </div>
         <div class="row">
            <div class="col-12">
-                Letzte Fahrt: {{$last_updated}} GMT
+                Letztes Update: {{$last_updated}} GMT
            </div>
 
        </div>
