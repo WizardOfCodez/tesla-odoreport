@@ -42,20 +42,19 @@ class OdoReportController extends Controller
     {
 
         $date = Carbon::now();
-        $existingReport = OdoReport::whereYear('created_at' ,"=", $date)
-        ->whereMonth('created_at' ,"=", $date)
-        ->first();
+        $existingReport = OdoReport::whereYear('created_at', "=", $date)
+            ->where('user', $request->get('user'))
+            ->whereMonth('created_at', "=", $date)
+            ->first();
 
 
-        if($existingReport){
-            OdoReport::whereYear('created_at' ,"=", $date)
-        ->whereMonth('created_at' ,"=", $date)->update($request->all());
-        } else{
+        if ($existingReport) {
+            OdoReport::whereYear('created_at', "=", $date)
+                ->whereMonth('created_at', "=", $date)->where('user', $request->get('user'))->update($request->all());
+        } else {
             $newReport = new OdoReport($request->all());
             $newReport->save();
         }
-
-
     }
 
     /**
