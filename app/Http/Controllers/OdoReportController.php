@@ -15,7 +15,7 @@ class OdoReportController extends Controller
      */
     public function index()
     {
-        $odo_reports = OdoReport::select('user', 'odometer', 'updated_at')->orderBy('created_at')
+        $odo_reports = OdoReport::select('user', 'odometer', 'updated_at')->whereYear('created_at', 2023)->orderBy('created_at')
             ->get();
         return view('odo', ['odo_reports' => $odo_reports->groupBy('user'), 'last_updated' => $odo_reports->max('updated_at')]);
     }
